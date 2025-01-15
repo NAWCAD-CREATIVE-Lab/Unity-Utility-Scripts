@@ -1,0 +1,14 @@
+{
+    "name": "gov.nawcad-creative-lab.utility-scripts",
+    "rootNamespace": "CREATIVE.Utility",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

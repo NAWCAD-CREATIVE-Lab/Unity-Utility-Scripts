@@ -1,0 +1,18 @@
+{
+    "name": "gov.nawcad-creative-lab.utility-scripts.Editor",
+    "rootNamespace": "CREATIVE.UtilityEditor",
+    "references": [
+        "GUID:0077372cc6ed67e4fab2b26e8a72af90"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

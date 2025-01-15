@@ -1,0 +1,54 @@
+using UnityEngine;
+using UnityEngine.Events;
+
+namespace CREATIVE.Utility
+{
+	/**
+		This Monobehaviour allows UnityEvents to be invoked at the start of a
+		scene.
+		
+		It also allows different UnityEvents to be invoked if the code is
+		running:
+			- In a development build
+			- In a release build
+			- In the editor
+			- In an IOS platform
+			- In an Android platform
+	*/
+	public class SetupActions : MonoBehaviour
+	{
+		public UnityEvent SceneStartActions;
+		
+		public UnityEvent DevelopmentBuildActions;
+
+		public UnityEvent ReleaseBuildActions;
+
+		public UnityEvent EditorActions;
+
+		public UnityEvent IOSActions;
+
+		public UnityEvent AndroidActions;
+		
+		void Start()
+		{
+			SceneStartActions.Invoke();
+			
+			if (Application.isEditor)
+				EditorActions.Invoke();
+			
+			else if (Debug.isDebugBuild)
+				DevelopmentBuildActions.Invoke();
+			
+			else if (!Debug.isDebugBuild)
+				ReleaseBuildActions.Invoke();
+			
+#if UNITY_IOS
+			IOSActions.Invoke();
+#endif
+
+#if UNITY_ANDROID
+			AndroidActions.Invoke();
+#endif
+		}
+	}
+}

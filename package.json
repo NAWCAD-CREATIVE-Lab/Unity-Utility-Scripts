@@ -1,0 +1,47 @@
+{
+    "name": "gov.nawcad-creative-lab.utility-scripts",
+    "version": "1.0.0",
+    "displayName": "Utility Scripts",
+    "description": "A collection of small single-purpose scripts.",
+    "unity": "6000.0",
+    "dependencies": {
+      
+    },
+    "author": {
+      "name": "NAWCAD CREATIVE Lab",
+      "email": "christopher.r.bowersock.civ@us.navy.mil",
+      "url": "https://spork.fusion.navy.mil/creative/devops/unity-packages/utility-scripts.git"
+    },
+    "samples": [
+      {
+        "displayName": "Comment Test",
+        "description": "Contains a test scene for the Comment script.",
+        "path": "Samples/Comment Test"
+      },
+      {
+        "displayName": "Setup Actions Test",
+        "description": "Contains a test scene for the Setup Actions script.",
+        "path": "Samples/Setup Actions Test"
+      },
+      {
+        "displayName": "Debug Logger Test",
+        "description": "Contains a test scene for using the Debug Logger object.",
+        "path": "Samples/Debug Logger Test"
+      },
+      {
+        "displayName": "Transform Controller Test",
+        "description": "Contains a test scene for using the Transform Controller script.",
+        "path": "Samples/Transform Controller Test"
+      },
+      {
+        "displayName": "Game Object Controller Test",
+        "description": "Contains a test scene for using the Game Object Controller script.",
+        "path": "Samples/Game Object Controller Test"
+      },
+      {
+        "displayName": "Scene Selector Test",
+        "description": "Contains a test scene for using the Scene Selector script.",
+        "path": "Samples/Scene Selector Test"
+      }
+    ]
+  }
