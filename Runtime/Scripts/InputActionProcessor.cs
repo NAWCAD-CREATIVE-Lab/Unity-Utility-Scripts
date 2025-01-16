@@ -77,7 +77,7 @@ namespace CREATIVE.Utility
 
 		private void UnRegister()
 		{
-			if (Action != null)
+			if (Action != null && registeredCallback != null)
 			{
 				if (registeredStage == e_ActionStage.Started)
 					Action.action.started -= Invoke;
@@ -88,8 +88,7 @@ namespace CREATIVE.Utility
 				if (registeredStage == e_ActionStage.Cancelled)
 					Action.action.canceled -= Invoke;
 
-				if (registeredCallback != null)
-					registeredCallback = null;
+				registeredCallback = null;
 			}
 		}
 
