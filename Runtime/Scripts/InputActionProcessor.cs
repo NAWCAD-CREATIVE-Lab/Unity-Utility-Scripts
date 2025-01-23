@@ -7,6 +7,16 @@ using UnityEngine.InputSystem;
 namespace CREATIVE.Utility
 {
 	/**
+		An enum only used for the ActionStage field.
+	*/
+	public enum InputActionStage
+	{
+		Started,
+		Performed,
+		Cancelled
+	}
+	
+	/**
 		This component listens for a particular Input Action from the
 		project-wide Input Actions and links it to a Unity Event callback.
 	*/
@@ -15,17 +25,9 @@ namespace CREATIVE.Utility
 		/**
 			A reference to the InputAction that should be listened for.
 		*/
-		public InputActionReference Action;
-
-		/**
-			An enum only used for the ActionStage field.
-		*/
-		public enum e_ActionStage
-		{
-			Started,
-			Performed,
-			Cancelled
-		}
+		[field: SerializeField]
+		private InputActionReference Action;
+		private InputActionReference registeredAction;
 
 		/**
 			Which stage of the InputAction should be listened for.
@@ -36,16 +38,18 @@ namespace CREATIVE.Utility
 			Started and Cancelled can be used to detect when a button starts and
 			stops being held down.
 		*/
-		public e_ActionStage ActionStage = e_ActionStage.Performed;
+		[field: SerializeField]
+		private InputActionStage ActionStage = InputActionStage.Performed;
+		private InputActionStage registeredActionStage;
 
 		/**
 			The UnityEvent that is invoked by the InputAction
 		*/
-		public UnityEvent Callback;
+		[field: SerializeField]
+		private UnityEvent Callback;
+		private UnityEvent registeredCallback;
 
-		private e_ActionStage registeredStage;
-
-		private UnityEvent registeredCallback = null;
+		private bool registered = false;
 
 		void Start()		=> ReRegister();
 		void OnValidate()	=> ReRegister();
@@ -58,44 +62,44 @@ namespace CREATIVE.Utility
 		{
 			UnRegister();
 
-			if (Application.isPlaying && isActiveAndEnabled && Action!=null)
+			registeredAction = Action;
+			registeredActionStage = ActionStage;
+			registeredCallback = Callback;
+
+			if (Application.isPlaying && isActiveAndEnabled && registeredAction!=null && registeredCallback!=null)
 			{
-				registeredStage = ActionStage;
+				registeredActionStage = ActionStage;
 
-				if (registeredStage == e_ActionStage.Started)
-					Action.action.started += Invoke;
+				if (registeredActionStage == InputActionStage.Started)
+					registeredAction.action.started += Invoke;
 				
-				if (registeredStage == e_ActionStage.Performed)
-					Action.action.performed += Invoke;
+				if (registeredActionStage == InputActionStage.Performed)
+					registeredAction.action.performed += Invoke;
 				
-				if (registeredStage == e_ActionStage.Cancelled)
-					Action.action.canceled += Invoke;
-
-				registeredCallback = Callback;
+				if (registeredActionStage == InputActionStage.Cancelled)
+					registeredAction.action.canceled += Invoke;
+				
+				registered = true;
 			}
 		}
 
 		private void UnRegister()
 		{
-			if (Action != null && registeredCallback != null)
+			if (registered)
 			{
-				if (registeredStage == e_ActionStage.Started)
-					Action.action.started -= Invoke;
+				if (registeredActionStage == InputActionStage.Started)
+					registeredAction.action.started -= Invoke;
 				
-				if (registeredStage == e_ActionStage.Performed)
-					Action.action.performed -= Invoke;
+				if (registeredActionStage == InputActionStage.Performed)
+					registeredAction.action.performed -= Invoke;
 				
-				if (registeredStage == e_ActionStage.Cancelled)
-					Action.action.canceled -= Invoke;
+				if (registeredActionStage == InputActionStage.Cancelled)
+					registeredAction.action.canceled -= Invoke;
 
-				registeredCallback = null;
+				registered = false;
 			}
 		}
 
-		private void Invoke(InputAction.CallbackContext context)
-		{
-			if (registeredCallback != null)
-				registeredCallback.Invoke();
-		}
+		private void Invoke(InputAction.CallbackContext context) => registeredCallback.Invoke();
 	}
 }

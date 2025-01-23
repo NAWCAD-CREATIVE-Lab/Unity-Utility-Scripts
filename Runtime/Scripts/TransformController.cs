@@ -13,13 +13,15 @@ namespace CREATIVE.Utility
 		/**
 			Slowly start and slowly stop animations.
 		*/
-		public bool EaseInAndOutAnimation = true;
+		[field: SerializeField]
+		private bool EaseInAndOutAnimation = true;
 
 		/**
 			How long (in seconds) animations will last.
 		*/
+		[field: SerializeField]
 		[Range(1, 10)]
-		public int AnimationDuration = 1;
+		private int AnimationDuration = 1;
 
 		private enum Property { Position, Rotation }
 

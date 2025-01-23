@@ -20,12 +20,14 @@ namespace CREATIVE.Utility
 	*/
 	public class SceneSelector : MonoBehaviour
 	{
-		public bool LoadSceneImmediately = false;
+		[field: SerializeField]
+		private bool LoadSceneImmediately = false;
 		
 		/**
 			The name of the scene to open if no scene is specified.
 		*/
-		public string DefaultScene;
+		[field: SerializeField]
+		private string DefaultScene;
 		
 		void Awake()
 		{
@@ -56,9 +58,6 @@ namespace CREATIVE.Utility
 			}
 		}
 
-		public void LoadScene(string sceneName)
-		{
-			SceneManager.LoadScene(sceneName);
-		}
+		public void LoadScene(string sceneName) => SceneManager.LoadScene(sceneName);
 	}
 }

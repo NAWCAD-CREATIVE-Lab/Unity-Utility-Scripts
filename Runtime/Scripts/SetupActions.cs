@@ -17,17 +17,12 @@ namespace CREATIVE.Utility
 	*/
 	public class SetupActions : MonoBehaviour
 	{
-		public UnityEvent SceneStartActions;
-		
-		public UnityEvent DevelopmentBuildActions;
-
-		public UnityEvent ReleaseBuildActions;
-
-		public UnityEvent EditorActions;
-
-		public UnityEvent IOSActions;
-
-		public UnityEvent AndroidActions;
+		[field: SerializeField] private UnityEvent SceneStartActions;
+		[field: SerializeField] private UnityEvent DevelopmentBuildActions;
+		[field: SerializeField] private UnityEvent ReleaseBuildActions;
+		[field: SerializeField] private UnityEvent EditorActions;
+		[field: SerializeField] private UnityEvent IOSActions;
+		[field: SerializeField] private UnityEvent AndroidActions;
 		
 		void Start()
 		{

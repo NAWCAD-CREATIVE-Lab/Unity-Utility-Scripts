@@ -4,7 +4,8 @@ namespace CREATIVE.Utility
 {
 	public class GameObjectController : MonoBehaviour
 	{
-		public bool EnabledByDefault = true;
+		[field: SerializeField]
+		private bool EnabledByDefault = true;
 
 		void Start()
 		{
