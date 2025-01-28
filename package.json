@@ -13,37 +13,37 @@
     {
       "displayName": "Comment Test",
       "description": "Contains a test scene for the Comment script.",
-      "path": "Samples/Comment Test"
+      "path": "Samples~/Comment Test"
     },
     {
       "displayName": "Setup Actions Test",
       "description": "Contains a test scene for the Setup Actions script.",
-      "path": "Samples/Setup Actions Test"
+      "path": "Samples~/Setup Actions Test"
     },
     {
       "displayName": "Input Action Processor Test",
       "description": "Contains a test scene for the Input Action Processor script.",
-      "path": "Samples/Input Action Processor Test"
+      "path": "Samples~/Input Action Processor Test"
     },
     {
       "displayName": "Debug Logger Test",
       "description": "Contains a test scene for using the Debug Logger object.",
-      "path": "Samples/Debug Logger Test"
+      "path": "Samples~/Debug Logger Test"
     },
     {
       "displayName": "Transform Controller Test",
       "description": "Contains a test scene for using the Transform Controller script.",
-      "path": "Samples/Transform Controller Test"
+      "path": "Samples~/Transform Controller Test"
     },
     {
       "displayName": "Game Object Controller Test",
       "description": "Contains a test scene for using the Game Object Controller script.",
-      "path": "Samples/Game Object Controller Test"
+      "path": "Samples~/Game Object Controller Test"
     },
     {
       "displayName": "Scene Selector Test",
       "description": "Contains a test scene for using the Scene Selector script.",
-      "path": "Samples/Scene Selector Test"
+      "path": "Samples~/Scene Selector Test"
     }
   ]
 }
