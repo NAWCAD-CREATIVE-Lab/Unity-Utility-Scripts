@@ -1,0 +1,114 @@
+{
+    "name": "Test Input Actions",
+    "maps": [
+        {
+            "name": "Test",
+            "id": "d0ebf0cf-4f0d-4b9b-b835-0711672087b8",
+            "actions": [
+                {
+                    "name": "Invisible Cursor",
+                    "type": "Button",
+                    "id": "c7aacd99-a9b7-4686-b137-89885875294a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Visible Cursor",
+                    "type": "Button",
+                    "id": "e52de7df-fbf7-4655-9a00-0692fe7607b3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Freed Cursor",
+                    "type": "Button",
+                    "id": "ac2f877e-171b-495c-9194-9287cc706f64",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Locked Cursor",
+                    "type": "Button",
+                    "id": "7fbc0446-ef99-45d0-91a0-d7e227906b93",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Confined Cursor",
+                    "type": "Button",
+                    "id": "19dbbbed-24d3-4968-b7c3-58a950c3ca30",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "18f770b3-3d76-4a75-baee-04d7cf1c2c22",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Invisible Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "66f0bfa7-791a-459a-b21f-44f1b3a5b157",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Visible Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1957df56-277d-4a26-834b-a95fd5cade21",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Freed Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa8dfff7-d16b-47fb-893d-0559d3c07e84",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Locked Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f967b30e-0a84-4d60-aa0d-5d2edc52421b",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confined Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

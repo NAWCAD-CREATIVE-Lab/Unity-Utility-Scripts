@@ -17,44 +17,56 @@ namespace CREATIVE.Utility
 		[field: SerializeField]
 		private string CommentText;
 
+		[field: SerializeField]
+		[field: HideInInspector]
+		private bool editMode;
+
 #if UNITY_EDITOR
 		[CustomEditor(typeof(Comment))]
 		public class Editor : UnityEditor.Editor
 		{
-			private bool editMode = true;
-			
 			public override void OnInspectorGUI()
 			{
-				if (editMode)
+				serializedObject.Update();
+
+				SerializedProperty commentProperty = serializedObject.FindProperty(nameof(Comment.CommentText));
+
+				SerializedProperty editModeProperty = serializedObject.FindProperty(nameof(Comment.editMode));
+				
+				if (editModeProperty.boolValue)
 				{
-					serializedObject.Update();
 					EditorGUILayout.PropertyField
 					(
-						serializedObject.FindProperty(nameof(Comment.CommentText)),
+						commentProperty,
 						GUIContent.none,
 						GUILayout.Height(100)
 					);
-					serializedObject.ApplyModifiedProperties();
+
+					EditorGUILayout.Space(20);
 
 					if (GUILayout.Button("Save"))
-						editMode = false;
+						editModeProperty.boolValue = false;
 				}
 
 				else
 				{
-					EditorGUI.BeginDisabledGroup(true);
+					GUIStyle labelStyle = EditorStyles.label;
 
-					EditorGUILayout.TextArea
+					labelStyle.wordWrap = true;
+					
+					EditorGUILayout.LabelField
 					(
-						(target as Comment).CommentText,
-						new GUIStyle(){ wordWrap = true }
+						commentProperty.stringValue,
+						labelStyle
 					);
 
-					EditorGUI.EndDisabledGroup();
+					EditorGUILayout.Space(20);
 
 					if (GUILayout.Button("Edit"))
-						editMode = true;
+						editModeProperty.boolValue = true;
 				}
+
+				serializedObject.ApplyModifiedProperties();
 			}
 		}
 #endif
