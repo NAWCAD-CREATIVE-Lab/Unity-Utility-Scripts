@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace CREATIVE.Utility
 {
@@ -10,6 +11,10 @@ namespace CREATIVE.Utility
 	[RequireComponent(typeof(Transform))]
 	public class TransformController : MonoBehaviour
 	{
+		private enum Property { Position, Rotation }
+
+		private enum Dimension { X, Y, Z }
+		
 		/**
 			Slowly start and slowly stop animations.
 		*/
@@ -23,9 +28,67 @@ namespace CREATIVE.Utility
 		[Range(1, 10)]
 		private int AnimationDuration = 1;
 
-		private enum Property { Position, Rotation }
+		/**
+			A reference to an Input action that will continuously affect a
+			property of this Transform.
+		*/
+		[field: SerializeField]
+		private InputActionReference DeltaInputAction;
+		private InputActionReference registeredDeltaInputAction;
 
-		private enum Dimension { X, Y, Z }
+		/**
+			The property of this transform that an Input Action will
+			continuously affect.
+		*/
+		[field: SerializeField]
+		private Property DeltaInputProperty;
+		private Property registeredDeltaInputProperty;
+
+		/**
+			The dimension of the property in this transform that an Input Action
+			will continuously affect.
+		*/
+		[field: SerializeField]
+		private Dimension DeltaInputDimension;
+		private Dimension registeredDeltaInputDimension;
+
+		/**
+			Whether or not the property of this Transform continuously affected
+			by an Input Action should stop being affected below a certain
+			minimum value.
+		*/
+		[field: SerializeField]
+		private bool DeltaInputHasMinimum = false;
+		private bool registeredDeltaInputHasMinimum;
+
+		/**
+			The minimum value at which the property of this Transform
+			continuously affected by an Input Action should stop decreasing. 
+		*/
+		[field: SerializeField]
+		private float DeltaInputMinimum;
+		private float registeredDeltaInputMinimum;
+
+		/**
+			Whether or not the property of this Transform continuously affected
+			by an Input Action should stop being affected above a certain
+			maximum value.
+		*/
+		[field: SerializeField]
+		private bool DeltaInputHasMaximum = false;
+		private bool registeredDeltaInputHasMaximum;
+
+		/**
+			The maximum value at which the property of this Transform
+			continuously affected by an Input Action should stop increasing. 
+		*/
+		[field: SerializeField]
+		private float DeltaInputMaximum;
+		private float registeredDeltaInputMaximum;
+
+		private float registeredDeltaInputCurrent;
+
+		private bool registered = false;
 		
 		private Vector3 initialPosition;
 
@@ -35,6 +98,12 @@ namespace CREATIVE.Utility
 
 		private Animation animationInProgress = null;
 
+		void OnValidate()	=> ReRegister();
+		void OnEnable()		=> ReRegister();
+
+		void OnDisable()	=> UnRegister();
+		void OnDestroy()	=> UnRegister();
+
 		void Start()
 		{
 			initialPosition = transform.localPosition;
@@ -42,6 +111,8 @@ namespace CREATIVE.Utility
 			initialScale = transform.localScale;
 
 			initialRotation = transform.localRotation;
+
+			ReRegister();
 		}
 
 		/**
@@ -54,12 +125,141 @@ namespace CREATIVE.Utility
 					animationInProgress = null;
 		}
 
+		private void ReRegister()
+		{
+			UnRegister();
+
+			registeredDeltaInputAction = DeltaInputAction;
+			registeredDeltaInputProperty = DeltaInputProperty;
+			registeredDeltaInputDimension = DeltaInputDimension;
+			registeredDeltaInputHasMinimum = DeltaInputHasMinimum;
+			registeredDeltaInputHasMaximum = DeltaInputHasMaximum;
+			registeredDeltaInputMinimum = DeltaInputMinimum;
+			registeredDeltaInputMaximum = DeltaInputMaximum;
+
+			if (Application.isPlaying && isActiveAndEnabled && registeredDeltaInputAction!=null)
+			{
+				if
+				(
+					registeredDeltaInputHasMinimum && registeredDeltaInputHasMaximum &&
+					registeredDeltaInputMinimum >= registeredDeltaInputMaximum
+				)
+					Debug.LogError (nameof(DeltaInputMinimum) + " must be less than " + nameof(DeltaInputMaximum));
+				
+				else
+				{
+					registeredDeltaInputCurrent = 0f;
+					
+					registeredDeltaInputAction.action.performed += ProcessDeltaInput;
+
+					registered = true;
+				}
+			}
+		}
+
+		private void UnRegister()
+		{
+			if (registered)
+			{
+				registeredDeltaInputAction.action.performed -= ProcessDeltaInput;
+
+				registered = false;
+			}
+		}
+
+		private void ProcessDeltaInput(InputAction.CallbackContext context)
+		{
+			if
+			(
+				Application.isPlaying && isActiveAndEnabled && registered &&
+				(
+					animationInProgress == null ||
+					registeredDeltaInputDimension != animationInProgress.Dimension ||
+					registeredDeltaInputProperty != animationInProgress.Property
+				)
+			)
+			{
+				float delta = context.ReadValue<float>();
+				
+				float current = 0f;
+
+				if (registeredDeltaInputProperty == Property.Position)
+				{
+					if (registeredDeltaInputDimension == Dimension.X) current = transform.localPosition.x;
+					if (registeredDeltaInputDimension == Dimension.Y) current = transform.localPosition.y;
+					if (registeredDeltaInputDimension == Dimension.Z) current = transform.localPosition.z;
+				}
+
+				if (registeredDeltaInputProperty == Property.Rotation)
+					current = registeredDeltaInputCurrent;
+
+				if
+				(
+					(
+						registeredDeltaInputProperty == Property.Position &&
+						(
+							!registeredDeltaInputHasMinimum ||
+							current > registeredDeltaInputMinimum ||
+							(current<=registeredDeltaInputMinimum && delta>0)
+						) &&
+						(
+							!registeredDeltaInputHasMaximum ||
+							current<registeredDeltaInputMaximum ||
+							(current>=registeredDeltaInputMaximum && delta<0)
+						)
+					) ||
+					(
+						registeredDeltaInputProperty == Property.Rotation &&
+						(
+							!registeredDeltaInputHasMinimum || !registeredDeltaInputHasMaximum ||
+							(
+								(
+									current > registeredDeltaInputMinimum ||
+									(current<=registeredDeltaInputMinimum && delta>0)
+								) &&
+								(
+									current<registeredDeltaInputMaximum ||
+									(current>=registeredDeltaInputMaximum && delta<0)
+								)
+							)
+						)
+					)
+				)
+				{
+					if (registeredDeltaInputProperty == Property.Rotation)
+					{
+						transform.Rotate(new Vector3
+						(
+							registeredDeltaInputDimension==Dimension.X? delta : 0,
+							registeredDeltaInputDimension==Dimension.Y? delta : 0,
+							registeredDeltaInputDimension==Dimension.Z? delta : 0
+						));
+
+						registeredDeltaInputCurrent += delta;
+					}
+
+					if (registeredDeltaInputProperty == Property.Position)
+					{
+						transform.Translate(new Vector3
+						(
+							registeredDeltaInputDimension==Dimension.X? delta : 0,
+							registeredDeltaInputDimension==Dimension.Y? delta : 0,
+							registeredDeltaInputDimension==Dimension.Z? delta : 0
+						));
+					}
+				}
+			}
+		}
+
 		/**
 			Sets the position of the object to its position at the start of the
 			scene (local space, not world space).
 		*/
-		public void SetInitialPosition() =>
-			transform.localPosition = initialPosition;
+		public void SetInitialPosition()
+		{
+			if (animationInProgress==null || animationInProgress.Property != Property.Position)
+				transform.localPosition = initialPosition;
+		}
 		
 		/**
 			Sets the scale of the object to its scale at the start of the scene
@@ -72,15 +272,21 @@ namespace CREATIVE.Utility
 			Sets the rotation of the object to its rotation at the start of the
 			scene (local space, not world space).
 		*/
-		public void SetInitialRotation() =>
-			transform.localRotation = initialRotation;
+		public void SetInitialRotation()
+		{
+			if (animationInProgress==null || animationInProgress.Property != Property.Rotation)
+				transform.localRotation = initialRotation;
+		}
 		
 		/**
 			Sets the position of the object to the position of another Transform
 			(local space, not world space).
 		*/
-		public void SetPositionFromTransform(Transform reference) =>
-			transform.localPosition = reference.localPosition;
+		public void SetPositionFromTransform(Transform reference)
+		{
+			if (animationInProgress==null || animationInProgress.Property != Property.Position)
+				transform.localPosition = reference.localPosition;
+		}
 		
 		/**
 			Sets the scale of the object to the scale of another Transform
@@ -93,8 +299,11 @@ namespace CREATIVE.Utility
 			Sets the rotation of the object to the rotation of another Transform
 			(local space, not world space).
 		*/
-		public void SetRotationFromTransform(Transform reference) =>
-			transform.localRotation = reference.localRotation;
+		public void SetRotationFromTransform(Transform reference)
+		{
+			if (animationInProgress==null || animationInProgress.Property != Property.Rotation)
+				transform.localRotation = reference.localRotation;
+		}
 		
 		/**
 			Changes the parent of this GameObject while allowing the world
@@ -229,13 +438,13 @@ namespace CREATIVE.Utility
 		// Internal class used to keep track of animation state.
 		private sealed class Animation
 		{
-			private readonly Transform Transform;
-			private readonly Property Property;
-			private readonly Dimension Dimension;
-			private readonly Vector3 VectorStart;
-			private readonly float PropertyValueEnd;
-			private readonly float Duration;
-			private readonly bool Ease;
+			public readonly Transform Transform;
+			public readonly Property Property;
+			public readonly Dimension Dimension;
+			public readonly Vector3 VectorStart;
+			public readonly float PropertyValueEnd;
+			public readonly float Duration;
+			public readonly bool Ease;
 
 			private float TimeElapsed = 0f;
 			private bool AnimationComplete = false;

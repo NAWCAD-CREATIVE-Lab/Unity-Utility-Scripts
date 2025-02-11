@@ -1,0 +1,54 @@
+{
+    "name": "Test Controls",
+    "maps": [
+        {
+            "name": "Test",
+            "id": "5bd2eab0-14cd-4c06-9408-f77866faf041",
+            "actions": [
+                {
+                    "name": "Look Horizontal",
+                    "type": "Value",
+                    "id": "7e537d23-1af2-4cc5-99b5-bdf1798e1fbf",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Look Vertical",
+                    "type": "Value",
+                    "id": "b48022ee-e3f0-4c34-8c1a-547de13eed5f",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "993eb4f0-66f6-47a2-9764-9e2b98e517bd",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "Scale(factor=0.1)",
+                    "groups": "",
+                    "action": "Look Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "add8d77e-d1ff-4b6f-ba9b-729f9d8bea4b",
+                    "path": "<Mouse>/delta/y",
+                    "interactions": "",
+                    "processors": "Invert,Scale(factor=0.1)",
+                    "groups": "",
+                    "action": "Look Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
