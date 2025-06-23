@@ -53,6 +53,15 @@ namespace CREATIVE.Utility
 		private Dimension registeredDeltaInputDimension;
 
 		/**
+			Whether or not the Input action that will continuously affect a
+			property of this Transform will be started and later cancelled to
+			produce a continous effect, as opposed to rapidly performed.
+		*/
+		[field: SerializeField]
+		private bool DeltaInputIsWillBeHeld;
+		private bool registeredDeltaInputWillBeHeld;
+
+		/**
 			Whether or not the property of this Transform continuously affected
 			by an Input Action should stop being affected below a certain
 			minimum value.
@@ -87,6 +96,10 @@ namespace CREATIVE.Utility
 		private float registeredDeltaInputMaximum;
 
 		private float registeredDeltaInputCurrent;
+
+		private float registeredDeltaInputIncrement;
+
+		private InputAction registeredDeltaInputInProgress;
 
 		private bool registered = false;
 		
@@ -123,6 +136,9 @@ namespace CREATIVE.Utility
 			if (animationInProgress != null)
 				if (animationInProgress.Increment(Time.deltaTime))
 					animationInProgress = null;
+
+			if (registeredDeltaInputInProgress != null)
+				IncrementDeltaInput(true);
 		}
 
 		private void ReRegister()
@@ -132,6 +148,7 @@ namespace CREATIVE.Utility
 			registeredDeltaInputAction = DeltaInputAction;
 			registeredDeltaInputProperty = DeltaInputProperty;
 			registeredDeltaInputDimension = DeltaInputDimension;
+			registeredDeltaInputWillBeHeld = DeltaInputIsWillBeHeld;
 			registeredDeltaInputHasMinimum = DeltaInputHasMinimum;
 			registeredDeltaInputHasMaximum = DeltaInputHasMaximum;
 			registeredDeltaInputMinimum = DeltaInputMinimum;
@@ -150,7 +167,8 @@ namespace CREATIVE.Utility
 				{
 					registeredDeltaInputCurrent = 0f;
 					
-					registeredDeltaInputAction.action.performed += ProcessDeltaInput;
+					registeredDeltaInputAction.action.started += ProcessDeltaInput;
+					registeredDeltaInputAction.action.canceled += ProcessDeltaInput;
 
 					registered = true;
 				}
@@ -161,13 +179,31 @@ namespace CREATIVE.Utility
 		{
 			if (registered)
 			{
-				registeredDeltaInputAction.action.performed -= ProcessDeltaInput;
+				registeredDeltaInputAction.action.started -= ProcessDeltaInput;
+				registeredDeltaInputAction.action.canceled -= ProcessDeltaInput;
 
 				registered = false;
 			}
 		}
 
 		private void ProcessDeltaInput(InputAction.CallbackContext context)
+		{
+			if (context.phase==InputActionPhase.Canceled && registeredDeltaInputInProgress==context.action)
+				registeredDeltaInputInProgress = null;
+
+			else if (context.phase == InputActionPhase.Started)
+			{
+				registeredDeltaInputIncrement = context.ReadValue<float>();
+
+				if (registeredDeltaInputWillBeHeld)
+					registeredDeltaInputInProgress = context.action;
+
+				else
+					IncrementDeltaInput(false);
+			}
+		}
+
+		private void IncrementDeltaInput(bool scaleByTime)
 		{
 			if
 			(
@@ -179,7 +215,10 @@ namespace CREATIVE.Utility
 				)
 			)
 			{
-				float delta = context.ReadValue<float>();
+				float delta = registeredDeltaInputIncrement;
+
+				if (scaleByTime)
+					delta *= Time.deltaTime;
 				
 				float current = 0f;
 

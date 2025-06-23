@@ -1,0 +1,138 @@
+{
+    "name": "Test Controls",
+    "maps": [
+        {
+            "name": "Test",
+            "id": "5bd2eab0-14cd-4c06-9408-f77866faf041",
+            "actions": [
+                {
+                    "name": "Look Horizontal",
+                    "type": "Value",
+                    "id": "7e537d23-1af2-4cc5-99b5-bdf1798e1fbf",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Look Vertical",
+                    "type": "Value",
+                    "id": "b48022ee-e3f0-4c34-8c1a-547de13eed5f",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Move Vertical",
+                    "type": "Value",
+                    "id": "9322a507-c430-478f-b1f9-b4848269862a",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Move Horizontal",
+                    "type": "Value",
+                    "id": "424a9d21-ec7c-41d0-936f-33ea7b1c53d9",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "993eb4f0-66f6-47a2-9764-9e2b98e517bd",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "Scale(factor=0.1)",
+                    "groups": "",
+                    "action": "Look Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "add8d77e-d1ff-4b6f-ba9b-729f9d8bea4b",
+                    "path": "<Mouse>/delta/y",
+                    "interactions": "",
+                    "processors": "Invert,Scale(factor=0.1)",
+                    "groups": "",
+                    "action": "Look Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "67bdc213-c37e-4908-b3bc-c4dc5c0788f9",
+                    "path": "1DAxis(whichSideWins=1)",
+                    "interactions": "",
+                    "processors": "Scale(factor=5)",
+                    "groups": "",
+                    "action": "Move Vertical",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "aade6f56-1964-4018-aa60-9d9cf5f01c48",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "33a9db0b-390c-49a3-9903-26027d3fe6dd",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "5362f5ad-a862-433a-9ffb-511597af4be0",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "Scale(factor=5)",
+                    "groups": "",
+                    "action": "Move Horizontal",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "e9dcd7c9-4708-4741-8c9e-b5ca267c54a8",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9883d225-826c-4dad-8fff-668093de817d",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

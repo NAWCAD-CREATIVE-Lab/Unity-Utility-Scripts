@@ -129,8 +129,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5615584}
   - component: {fileID: 5615585}
+  - component: {fileID: 5615587}
+  - component: {fileID: 5615586}
   m_Layer: 0
-  m_Name: Horizontal Rotator
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +146,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5615583}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -169,6 +171,51 @@ MonoBehaviour:
   DeltaInputAction: {fileID: 1107272262185460373, guid: 68a29a5dfff2b114bb6a8bb7caa4aedf, type: 3}
   DeltaInputProperty: 1
   DeltaInputDimension: 1
+  DeltaInputIsWillBeHeld: 0
+  DeltaInputHasMinimum: 0
+  DeltaInputMinimum: 0
+  DeltaInputHasMaximum: 0
+  DeltaInputMaximum: 0
+--- !u!114 &5615586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5615583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c8796097ccddac4abd9bb8ea9c8e09c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EaseInAndOutAnimation: 1
+  AnimationDuration: 1
+  DeltaInputAction: {fileID: -5429652554852108011, guid: 68a29a5dfff2b114bb6a8bb7caa4aedf, type: 3}
+  DeltaInputProperty: 0
+  DeltaInputDimension: 0
+  DeltaInputIsWillBeHeld: 1
+  DeltaInputHasMinimum: 0
+  DeltaInputMinimum: 0
+  DeltaInputHasMaximum: 0
+  DeltaInputMaximum: 0
+--- !u!114 &5615587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5615583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c8796097ccddac4abd9bb8ea9c8e09c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EaseInAndOutAnimation: 1
+  AnimationDuration: 1
+  DeltaInputAction: {fileID: -6468439267589140338, guid: 68a29a5dfff2b114bb6a8bb7caa4aedf, type: 3}
+  DeltaInputProperty: 0
+  DeltaInputDimension: 2
+  DeltaInputIsWillBeHeld: 1
   DeltaInputHasMinimum: 0
   DeltaInputMinimum: 0
   DeltaInputHasMaximum: 0
@@ -184,7 +231,7 @@ GameObject:
   - component: {fileID: 152647393}
   - component: {fileID: 152647394}
   m_Layer: 0
-  m_Name: Vertical Rotator
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,14 +245,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152647392}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 242626881}
   m_Father: {fileID: 5615584}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &152647394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +270,7 @@ MonoBehaviour:
   DeltaInputAction: {fileID: 6700716977711180385, guid: 68a29a5dfff2b114bb6a8bb7caa4aedf, type: 3}
   DeltaInputProperty: 1
   DeltaInputDimension: 0
+  DeltaInputIsWillBeHeld: 0
   DeltaInputHasMinimum: 1
   DeltaInputMinimum: -40
   DeltaInputHasMaximum: 1
@@ -297,16 +345,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'This scene has a mouselook setup enabled by default.
+  m_Text: 'This scene has a basic player controller enabled by default.
 
 
-    The cursor
-    is locked to the center of the screen and the camera can be rotated horizontally
-    and vertically with the mouse.
+    Movement
+    can be performed using that WASD keys.
 
 
-    The vertical rotation is locked to 40 degrees
-    in either direction.'
+    The cursor is locked to the center
+    of the screen and the camera can be rotated horizontally and vertically with
+    the mouse.
+
+
+    The vertical rotation is locked to 40 degrees in either direction.'
 --- !u!222 &198653054
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -328,7 +379,7 @@ GameObject:
   - component: {fileID: 242626879}
   - component: {fileID: 242626882}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Eyes
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -777,7 +828,7 @@ Transform:
   m_GameObject: {fileID: 685983771}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35355338, y: -0.1464466, z: 0.35355338, w: 0.8535535}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -897,7 +948,7 @@ Transform:
   m_GameObject: {fileID: 891226543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35355338, y: -0.1464466, z: 0.35355338, w: 0.8535535}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1005,7 +1056,7 @@ Transform:
   m_GameObject: {fileID: 921853598}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35355338, y: -0.1464466, z: 0.35355338, w: 0.8535535}
-  m_LocalPosition: {x: -5, y: 0, z: -0}
+  m_LocalPosition: {x: -20, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1150,7 +1201,7 @@ Transform:
   m_GameObject: {fileID: 1199812863}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35355338, y: -0.1464466, z: 0.35355338, w: 0.8535535}
-  m_LocalPosition: {x: 0, y: 5, z: -0}
+  m_LocalPosition: {x: 0, y: 20, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1343,9 +1394,9 @@ RectTransform:
   m_Father: {fileID: 313559677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 900, y: 350}
+  m_SizeDelta: {x: -20, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1373825160
 MonoBehaviour:
@@ -1413,7 +1464,7 @@ Transform:
   m_GameObject: {fileID: 2044008275}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35355338, y: -0.1464466, z: 0.35355338, w: 0.8535535}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1521,7 +1572,7 @@ Transform:
   m_GameObject: {fileID: 2112536802}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35355338, y: -0.1464466, z: 0.35355338, w: 0.8535535}
-  m_LocalPosition: {x: 0, y: -5, z: -0}
+  m_LocalPosition: {x: 0, y: -20, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
