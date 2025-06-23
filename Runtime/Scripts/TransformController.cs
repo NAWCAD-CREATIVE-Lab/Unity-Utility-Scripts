@@ -513,9 +513,6 @@ namespace CREATIVE.Utility
 				if (transform == null)
 					throw new ArgumentNullException("transform");
 				
-				if (propertyValueDelta <= 0)
-					throw new InvalidOperationException("Property Value Delta must be greater than zero");
-				
 				if (duration <= 0)
 					throw new InvalidOperationException("Duration must be greater than zero");
 				
