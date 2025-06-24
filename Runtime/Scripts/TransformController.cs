@@ -58,7 +58,7 @@ namespace CREATIVE.Utility
 			produce a continous effect, as opposed to rapidly performed.
 		*/
 		[field: SerializeField]
-		private bool DeltaInputIsWillBeHeld;
+		private bool DeltaInputWillBeHeld;
 		private bool registeredDeltaInputWillBeHeld;
 
 		/**
@@ -148,7 +148,7 @@ namespace CREATIVE.Utility
 			registeredDeltaInputAction = DeltaInputAction;
 			registeredDeltaInputProperty = DeltaInputProperty;
 			registeredDeltaInputDimension = DeltaInputDimension;
-			registeredDeltaInputWillBeHeld = DeltaInputIsWillBeHeld;
+			registeredDeltaInputWillBeHeld = DeltaInputWillBeHeld;
 			registeredDeltaInputHasMinimum = DeltaInputHasMinimum;
 			registeredDeltaInputHasMaximum = DeltaInputHasMaximum;
 			registeredDeltaInputMinimum = DeltaInputMinimum;
