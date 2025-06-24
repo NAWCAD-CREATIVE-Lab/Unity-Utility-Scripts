@@ -171,7 +171,7 @@ MonoBehaviour:
   DeltaInputAction: {fileID: 1107272262185460373, guid: 68a29a5dfff2b114bb6a8bb7caa4aedf, type: 3}
   DeltaInputProperty: 1
   DeltaInputDimension: 1
-  DeltaInputIsWillBeHeld: 0
+  DeltaInputWillBeHeld: 0
   DeltaInputHasMinimum: 0
   DeltaInputMinimum: 0
   DeltaInputHasMaximum: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   DeltaInputAction: {fileID: -5429652554852108011, guid: 68a29a5dfff2b114bb6a8bb7caa4aedf, type: 3}
   DeltaInputProperty: 0
   DeltaInputDimension: 0
-  DeltaInputIsWillBeHeld: 1
+  DeltaInputWillBeHeld: 1
   DeltaInputHasMinimum: 0
   DeltaInputMinimum: 0
   DeltaInputHasMaximum: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   DeltaInputAction: {fileID: -6468439267589140338, guid: 68a29a5dfff2b114bb6a8bb7caa4aedf, type: 3}
   DeltaInputProperty: 0
   DeltaInputDimension: 2
-  DeltaInputIsWillBeHeld: 1
+  DeltaInputWillBeHeld: 1
   DeltaInputHasMinimum: 0
   DeltaInputMinimum: 0
   DeltaInputHasMaximum: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   DeltaInputAction: {fileID: 6700716977711180385, guid: 68a29a5dfff2b114bb6a8bb7caa4aedf, type: 3}
   DeltaInputProperty: 1
   DeltaInputDimension: 0
-  DeltaInputIsWillBeHeld: 0
+  DeltaInputWillBeHeld: 0
   DeltaInputHasMinimum: 1
   DeltaInputMinimum: -40
   DeltaInputHasMaximum: 1
