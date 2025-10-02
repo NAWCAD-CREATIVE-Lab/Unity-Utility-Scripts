@@ -16,6 +16,9 @@ namespace CREATIVE.Utility
 	[RequireComponent(typeof(CharacterController))]
 	public class CharacterControllerController : MonoBehaviour
 	{
+		[field: SerializeField] float GravityAcceleration = -9.81f;
+								float registeredGravityAcceleration;
+
 		[field: SerializeField]	InputActionReference ForwardInputAction;
 								InputActionReference registeredForwardInputAction;
 		
@@ -56,6 +59,8 @@ namespace CREATIVE.Utility
 			registeredBackwardInputAction = BackwardInputAction;
 			registeredLeftInputAction = LeftInputAction;
 			registeredRightInputAction = RightInputAction;
+
+			registeredGravityAcceleration = GravityAcceleration;
 
 			if
 			(
@@ -132,21 +137,21 @@ namespace CREATIVE.Utility
 		{
 			if (Application.isPlaying && isActiveAndEnabled && registered)
 			{
-				Vector3 moveVector = Vector3.zero;
+				Vector3 moveVector = new Vector3(0f, registeredGravityAcceleration, 0f);
 
 				if (forwardDominant)
 					moveVector = new Vector3
 					(
 						moveVector.x,
-						0f,
+						moveVector.y,
 						currentInputValues[registeredForwardInputAction.action]
 					);
-				
+
 				else
 					moveVector = new Vector3
 					(
 						moveVector.x,
-						0f,
+						moveVector.y,
 						-currentInputValues[registeredBackwardInputAction.action]
 					);
 				
@@ -154,7 +159,7 @@ namespace CREATIVE.Utility
 					moveVector = new Vector3
 					(
 						-currentInputValues[registeredLeftInputAction.action],
-						0f,
+						moveVector.y,
 						moveVector.z
 					);
 				
@@ -162,7 +167,7 @@ namespace CREATIVE.Utility
 					moveVector = new Vector3
 					(
 						currentInputValues[registeredRightInputAction.action],
-						0f,
+						moveVector.y,
 						moveVector.z
 					);
 
