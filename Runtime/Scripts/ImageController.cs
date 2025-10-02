@@ -15,6 +15,10 @@ namespace CREATIVE.Utility
 		[field: SerializeField]
 		float NewAlphaHitTestMinimumThreshold = 0.0f;
 
-		void Start() => GetComponent<Image>().alphaHitTestMinimumThreshold = NewAlphaHitTestMinimumThreshold;
+		void Start()
+		{
+			if (OverrideAlphaHitTestMinimumThresholdOnStart)
+				GetComponent<Image>().alphaHitTestMinimumThreshold = NewAlphaHitTestMinimumThreshold;
+		}
 	}
 }

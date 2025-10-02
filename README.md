@@ -11,6 +11,7 @@ The central goal of this package is to extend the functionality of built-in Mono
 - [Transform Controller](Runtime/Scripts/TransformController.cs)
 - [Image Controller](Runtime/Scripts/ImageController.cs)
 - [Game Object Controller](Runtime/Scripts/GameObjectController.cs)
+- [Character Controller Controller](Runtime/Scripts/CharacterControllerController.cs)
 
 Some utilities in this package also aim to provide single-parameter access to basic engine functionality, but are not related to any specific MonoBehaviour, and are instead constructed as Scriptable Objects. These utilities are:
 - [Application Controller](Runtime/Scripts/ApplicationController.cs)

@@ -1,6 +1,6 @@
 {
   "name": "gov.nawcad-creative-lab.utility-scripts",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "displayName": "Utility Scripts",
   "description": "A collection of small single-purpose scripts.",
   "unity": "6000.0",
@@ -49,6 +49,11 @@
       "displayName": "Application Controller Test",
       "description": "Contains test scenes for using the Application Controller object.",
       "path": "Samples~/02 Application Controller Test"
+    },
+    {
+      "displayName": "Character Controller Controller Test",
+      "description": "Contains test scenes for using the Character Controller Controller script.",
+      "path": "Samples~/02 Character Controller Controller Test"
     },
     {
       "displayName": "Transform Controller Test",
