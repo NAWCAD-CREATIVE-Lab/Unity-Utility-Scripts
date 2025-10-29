@@ -1,6 +1,6 @@
 {
   "name": "gov.nawcad-creative-lab.utility-scripts",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "displayName": "Utility Scripts",
   "description": "A collection of small single-purpose scripts.",
   "unity": "6000.0",

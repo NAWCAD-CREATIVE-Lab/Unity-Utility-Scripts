@@ -137,41 +137,36 @@ namespace CREATIVE.Utility
 		{
 			if (Application.isPlaying && isActiveAndEnabled && registered)
 			{
-				Vector3 moveVector = new Vector3(0f, registeredGravityAcceleration, 0f);
+				float forwardSpeed, leftSpeed;
 
 				if (forwardDominant)
-					moveVector = new Vector3
-					(
-						moveVector.x,
-						moveVector.y,
-						currentInputValues[registeredForwardInputAction.action]
-					);
+					forwardSpeed = currentInputValues[registeredForwardInputAction.action];
 
 				else
-					moveVector = new Vector3
-					(
-						moveVector.x,
-						moveVector.y,
-						-currentInputValues[registeredBackwardInputAction.action]
-					);
-				
+					forwardSpeed = -currentInputValues[registeredBackwardInputAction.action];
+
 				if (leftDominant)
-					moveVector = new Vector3
-					(
-						-currentInputValues[registeredLeftInputAction.action],
-						moveVector.y,
-						moveVector.z
-					);
-				
-				else
-					moveVector = new Vector3
-					(
-						currentInputValues[registeredRightInputAction.action],
-						moveVector.y,
-						moveVector.z
-					);
+					leftSpeed = currentInputValues[registeredLeftInputAction.action];
 
-				registeredCharacterController.Move(moveVector * Time.deltaTime);
+				else
+					leftSpeed = -currentInputValues[registeredRightInputAction.action];
+
+
+				registeredCharacterController.Move
+				(
+					(
+						(
+							(
+								(transform.forward * forwardSpeed).normalized +
+								(transform.right * -leftSpeed).normalized
+							).normalized *
+							MathF.Max(MathF.Abs(forwardSpeed), MathF.Abs(leftSpeed))
+						) +
+						// TODO: Actually use this variable as gravitational acceleration, instead of speed
+						transform.up * registeredGravityAcceleration
+					) *
+					Time.deltaTime
+				);
 			}
 		}
 	}
