@@ -1,5 +1,5 @@
 # Utility Scripts for the Unity Game Engine
-This package contains a set of small, commonly used, narrow-purpose utilities for the [Unity game engine](https://unity.com/), originally authored by the CREATIVE Lab at [NAWCAD Lakehurst](https://www.navair.navy.mil/lakehurst/) for the purposes of virtual training development.
+This package contains a set of small, commonly used, narrow-purpose utilities for the [Unity game engine](https://unity.com/), originally authored by the CREATIVE Lab at [NAWCAD Lakehurst](https://www.navair.navy.mil/lakehurst/) for the purposes of training simulation development.
 
 ## Using in a project
 The current version of this package is intended to be used with the most recent LTS version of Unity 6.
